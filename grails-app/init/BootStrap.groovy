@@ -4,6 +4,8 @@ import com.dyan.ex.Person
 class BootStrap {
 
     def init = { servletContext ->
+        new CustomMarshallerRegistrar().registerMarshallers()
+
         environments {
             production {
 
