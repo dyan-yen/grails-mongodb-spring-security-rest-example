@@ -1,3 +1,6 @@
+import com.dyan.auth.Role
+import com.dyan.auth.User
+import com.dyan.auth.UserRole
 import com.dyan.ex.Address
 import com.dyan.ex.Person
 
@@ -40,6 +43,16 @@ class BootStrap {
                     patrick['aka'] = "Sea Star"
                     patrick.save(flush: true)
                 }
+
+                // spring security Users & Roles
+                Role userRole = new Role(authority: "ROLE_USER").save(flush: true)
+                Role adminRole = new Role(authority: "ROLE_ADMIN").save(flush: true)
+
+                User user = new User(username: "user", password: "password").save(flush: true)
+                User admin = new User(username: "admin", password: "password").save(flush: true)
+
+                UserRole.create(user, userRole, true)
+                UserRole.create(admin, adminRole, true)
             }
         }
     }
